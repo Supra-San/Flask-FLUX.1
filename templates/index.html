@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FLUX.1-dev Text-to-Image</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron mt-4">
+                <h1 class="display-4">Text-to-Image FLUX.1</h1>
+                <h2 class="lead">FLUX.1 is a 12 billion parameter rectified flow transformer capable of generating
+                    images from text descriptions.
+                    <a
+                        href="http://https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/LICENSE.md">[license]</a>
+                    <a href="http://https://blackforestlabs.ai/announcing-black-forest-labs/">[blog]</a> <a
+                        href="http://https://huggingface.co/black-forest-labs/FLUX.1-dev">[model]</a></p>
+                    <hr class="my-4">
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="POST" action="/">
+                                <div class="mb-3">
+                                    <label for="prompt" class="form-label">Prompt</label>
+                                    <input type="text" class="form-control" id="prompt" name="prompt"
+                                        placeholder="Enter your prompt here.." autocomplete="off" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Generate</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            {% if image %}
+                            <label for="image_result" class="form-label">Result Image</label>
+                            <img src="{{ image }}" class="img-thumbnail" alt="Generated Image" width="512px" height="512px"
+                                id="image_result">
+                            <a href="{{ image }}" download="generated_image.png" class="btn btn-success mt-3">Save
+                                Image</a>
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
